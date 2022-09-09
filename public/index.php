@@ -73,42 +73,6 @@ else if ($uri_parts[1] == "manage_currencies") {
 else if ($uri_parts[1] == "analytics") {
     include($src_path."/analytics.php");
 }
-else if ($uri_parts[1] == "testnet") {
-    $blockchain = 'abweb';
-    $diff = 8;
-    $index = 0;
-    $hash = hash_hmac('sha256', $index, $index-1);
-    $next_hash = hash_hmac('sha256', $index+1, $index);
-    $tx = hash('sha256', time());
-    $a0 = substr($hash, $diff);
-    $a1 = substr($next_hash, $diff);
-    $nounce = substr($hash, 0, $diff);
-    echo "<div>";
-    echo $blockchain." block #".$index;
-    echo "<hr>";
-    echo "Tblock hash: ".str_pad(strval($a0), '68','0', STR_PAD_LEFT)."</br>";
-    echo "Nblock hash: ".str_pad(strval($a1), '68','0', STR_PAD_LEFT)."</br>";
-    echo "Mined at ".date('Y-m-d h:i:s T', time())."</br>";
-    echo "coinbase_tx: ".$tx."</br>";
-    echo "Nounce: ". hexdec($nounce);
-    echo "<hr>";
-    
-$row = 1;
-if (($handle = fopen("address.csv", "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-        $num = count($data);
-        echo "<p> $num fields in line $row: <br /></p>\n";
-        $row++;
-        for ($c=0; $c < $num; $c++) {
-            echo $data[$c] . "<br />\n";
-        }
-    }
-    fclose($handle);
-}
-    echo "<hr>";
-    $mysqli = new mysqli("localhost", "root", "", "afocha_db");
-    echo $mysqli->host_info . "\n";
-}
 else if ($uri_parts[1] == "public") {
     include($src_path."/v1.api.php");
 }
