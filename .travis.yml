@@ -17,4 +17,4 @@ deploy:
   target_branch: master
   on:
     branch: staging
-    repo: bcoin-org/bcoin-org.github.io
+    repo: aonyex/aonyex.github.io
